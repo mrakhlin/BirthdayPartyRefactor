@@ -7,8 +7,30 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
+    @Test
+    public void testAppHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    }
+    
+    @Test
+    public void testBuilder() {
+    	
+    	Order order = new Order.Builder()
+		.setBalloon(new Balloon.Builder()
+					.setColor(Balloon.Color.YELLOW)
+					.setMaterial(Balloon.Material.MYLAR)
+					.build())
+		.setBalloonNumber(4)
+		.setCake(new Cake.Builder()
+				.setFlavor(Cake.Flavor.VANILLA)
+				.setFrostingFlavor(Cake.FrostingFlavor.VANILLA)
+				.setShape(Cake.Shape.SQUARE)
+				.setSize(Cake.Size.SMALL)
+				.setColor(Cake.Color.YELLOW)
+				.build())
+		.build();
+    	
+    	assertTrue(order.getCake().getColor() == Cake.Color.YELLOW);
     }
 }
